@@ -4,7 +4,6 @@ import numpy as np
 import sklearn
 import pandas as pd
 import seaborn as sns
-#import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from logger import setup_logger
 

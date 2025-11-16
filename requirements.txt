@@ -1,6 +1,4 @@
-catboost
-xgboost
-lightgbm
+# Requirements for the machine learning project
 scikit-learn
 pandas
 numpy
@@ -8,9 +6,5 @@ matplotlib
 seaborn
 jupyterlab
 plotly
-tensorflow
 keras
-torch
 transformers
-fastapi
-uvicorn

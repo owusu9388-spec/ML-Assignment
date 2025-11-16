@@ -1,0 +1,16 @@
+catboost
+xgboost
+lightgbm
+scikit-learn
+pandas
+numpy
+matplotlib
+seaborn
+jupyterlab
+plotly
+tensorflow
+keras
+torch
+transformers
+fastapi
+uvicorn

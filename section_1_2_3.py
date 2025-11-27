@@ -663,6 +663,10 @@ logger.info(f"\n{pd.Series(y_clean).value_counts()}")
 sm = SMOTE(random_state=42)
 X_resampled, y_resampled = sm.fit_resample(X_clean, y_clean)
 
+X_train_bal = X_resampled
+y_train_bal = y_resampled
+
+
 logger.success("SMOTE oversampling complete.")
 logger.info("Class distribution AFTER SMOTE:")
 logger.info(f"\n{pd.Series(y_resampled).value_counts()}")
@@ -699,3 +703,38 @@ plt.show()
 logger.success("Data preprocessing and balancing completed successfully!")
 logger.info("Use X_resampled, y_resampled for model training.")
 logger.info("Use X_test_processed, y_test for model evaluation.")
+
+
+# ==========================================================
+# Export processed data for Section 4 (Supervised Learning)
+# ==========================================================
+import joblib
+
+output_dir = "outputs_section4"
+os.makedirs(output_dir, exist_ok=True)
+
+# Export training-set (balanced)
+pd.DataFrame(X_train_bal, columns=feature_names).to_csv(
+    f"{output_dir}/{DATASET}_X_train_bal.csv", index=False
+)
+pd.DataFrame(y_train_bal, columns=["target"]).to_csv(
+    f"{output_dir}/{DATASET}_y_train_bal.csv", index=False
+)
+
+# Export test-set (processed but NOT balanced)
+pd.DataFrame(X_test_processed, columns=feature_names).to_csv(
+    f"{output_dir}/{DATASET}_X_test_processed.csv", index=False
+)
+pd.DataFrame(y_test, columns=["target"]).to_csv(
+    f"{output_dir}/{DATASET}_y_test.csv", index=False
+)
+
+# Export feature names
+pd.Series(feature_names).to_csv(
+    f"{output_dir}/{DATASET}_final_feature_names.csv", index=False
+)
+
+# Save preprocessor
+joblib.dump(preprocessor, f"{output_dir}/{DATASET}_preprocessor.pkl")
+
+logger.success(f"All Section 4 files exported to: {output_dir}")
